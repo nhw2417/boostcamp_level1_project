@@ -142,17 +142,6 @@ def train(data_dir, model_dir, args):
     # -- model
     model_module = getattr(import_module("model"), args.model)  # default: BaseModel
     model = model_module(num_classes=num_classes).to(device)
-    '''
-    import torchvision.models as models
-    model = models.resnet50(pretrained=True)
-    model.fc = torch.nn.Linear(model.fc.in_features, num_classes)
-    for param in model.parameters():
-        param.requires_grad = False
-    # 마지막 계층의 가중치는 학습되도록 설정
-    for param in model.fc.parameters():
-        param.requires_grad = True
-    '''
-
     model = torch.nn.DataParallel(model)
 
     # -- loss & metric
@@ -276,7 +265,7 @@ if __name__ == "__main__":
         "--seed", type=int, default=42, help="random seed (default: 42)"
     )
     parser.add_argument(
-        "--epochs", type=int, default=300, help="number of epochs to train (default: 1)"
+        "--epochs", type=int, default=20, help="number of epochs to train (default: 1)"
     )
     parser.add_argument(
         "--dataset",
