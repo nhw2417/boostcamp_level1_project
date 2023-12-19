@@ -1,7 +1,16 @@
 import torch.nn as nn
 import torch.nn.functional as F
+import torchvision.models as models
 
-
+class ResNet50(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.resnet = models.resnet50(pretrained=True)
+        self.resnet.fc = nn.Linear(self.resnet.fc.in_features, num_classes)
+    
+    def forward(self, x):
+        return self.resnet(x)
+    
 class BaseModel(nn.Module):
     """
     기본적인 컨볼루션 신경망 모델
