@@ -124,7 +124,8 @@ def train(data_dir, model_dir, args):
     train_loader = DataLoader(
         train_set,
         batch_size=args.batch_size,
-        num_workers=multiprocessing.cpu_count() // 2,
+        #num_workers=multiprocessing.cpu_count() // 2,
+        num_workers=0,
         shuffle=True,
         pin_memory=use_cuda,
         drop_last=True,
