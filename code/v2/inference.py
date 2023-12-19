@@ -9,6 +9,7 @@ from torch.utils.data import DataLoader
 
 from dataset import TestDataset, MaskBaseDataset
 
+from torchvision import models
 
 def load_model(saved_model, num_classes, device):
     """
