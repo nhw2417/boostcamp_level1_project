@@ -120,7 +120,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_dir",
         type=str,
-        default=os.environ.get("SM_CHANNEL_EVAL", "/opt/ml/input/data/eval"),
+        default=os.environ.get("SM_CHANNEL_EVAL", "/data/ephemeral/home/eval"),
     )
     parser.add_argument(
         "--model_dir",

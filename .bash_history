@@ -146,3 +146,51 @@ python code/v2/inference.py --model_dir .cache/torch/hub/checkpoints --output_di
 rm code/v2/output/resnet18_pretrained/
 rmdir code/v2/output/resnet18_pretrained/
 python code/v2/inference.py --model_dir .cache/torch/hub/checkpoints --output_dir code/v2/output/resnet18_pretrained
+source /opt/conda/bin/activate myenv
+source /opt/conda/bin/activate myenv
+watch -n 1 nvidia-smi
+source /opt/conda/bin/activate myenv
+pwd
+cd code/v2
+python
+python inference.py --model_dir ../../.cache/torch/hub/checkpoints --output_dir output/resnet18_pretrained
+python inference.py --model_dir ../../.cache/torch/hub/checkpoints --output_dir output/resnet18_pretrained
+python inference.py --model_dir ../../.cache/torch/hub/checkpoints --output_dir output/resnet18_pretrained
+python inference.py --model_dir ../../.cache/torch/hub/checkpoints --output_dir output/resnet18_pretrained
+python train.py --name pretrained_resnet50
+echo $SM_CHANNEL_TRAIN
+cd ~
+export SM_CHANNEL_TRAIN train/images
+export SM_CHANNEL_TRAIN=/data/ephemeral/home/train/images
+echo $SM_CHANNEL_TRAIN
+export SM_CHANNEL_EVAL=/data/ephemeral/home/eval
+python train.py --name pretrained_resnet50
+pwd
+cd code/v2
+python train.py --name pretrained_resnet50
+python inference.py --model_dir "./model/pretrained_resnet50" --output_dir "./output/pretrained_resnet50"
+python inference.py --model_dir "./model/pretrained_resnet50" --output_dir "./output/pretrained_resnet50"
+cd ..
+cd custum
+cd custom/
+git clone https://github.com/nhw2417/boostcamp_level1_project/tree/master/code/v2
+git add .
+git add ~
+git add ../../.
+git add .
+echo $SM_MODEL_DIR
+echo $SM_CHANNEL_TRAINI
+echo $SM_CHANNEL_TRAIN
+--name help
+help --name
+python train.py --name resnet50 --model ResNet50
+python train.py --name resnet50 --model ResNet50
+python inference.py --model_dir model/resnet502 --output output/resnet50
+python inference.py --model_dir model/resnet50 --output output/resnet50
+python inference.py --model_dir model/resnet50 --output output/resnet50 --model ResNet50
+python train.py --name resnet50_batch256 --model ResNet50 --batch_size 256
+python inference.py --model_dir model/resnet50_batch256 --output output/resnet50_batch256 --model ResNet50
+python
+source /opt/conda/bin/activate myenv
+watch -l 1 nvidia-smi
+watch -n 1 nvidia-smi
