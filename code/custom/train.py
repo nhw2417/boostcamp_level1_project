@@ -173,6 +173,10 @@ def train(data_dir, model_dir, args):
         weight_decay=5e-4,
     )
     scheduler = StepLR(optimizer, args.lr_decay_step, gamma=0.5)
+    
+    ###
+    #scaler = torch.cuda.amp.GradScaler()
+    ###
 
     # -- logging
     logger = SummaryWriter(log_dir=save_dir)
@@ -198,6 +202,19 @@ def train(data_dir, model_dir, args):
             labels = labels.to(device)
 
             optimizer.zero_grad()
+
+            ###
+            '''
+            with torch.cuda.amp.autocast():
+                outs = model(inputs)
+                preds = torch.argmax(outs, dim=-1)
+                loss = criterion(outs, labels)
+
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            '''
+            ###
 
             outs = model(inputs)
             preds = torch.argmax(outs, dim=-1)
@@ -356,7 +373,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=64,
+        default=32,
         help="input batch size for training (default: 64)",
     )
     parser.add_argument(
@@ -395,7 +412,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--log_interval",
         type=int,
-        default=20,
+        default=40,
         help="how many batches to wait before logging training status",
     )
     parser.add_argument(
