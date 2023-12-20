@@ -18,6 +18,7 @@ from torch.utils.tensorboard import SummaryWriter
 from dataset import MaskBaseDataset
 from loss import create_criterion
 
+import torchmetrics.functional as tmf
 
 def seed_everything(seed):
     torch.manual_seed(seed)
@@ -88,6 +89,24 @@ def increment_path(path, exist_ok=False):
         n = max(i) + 1 if i else 2
         return f"{path}{n}"
 
+###
+'''
+def calculate_f1_score(y_true, y_pred):
+    epsilon = 1e-7  # 0으로 나누는 것을 방지하기 위한 작은 값
+
+    # True Positives, False Positives, False Negatives 계산
+    tp = (y_true * y_pred).sum().to(torch.float32)
+    fp = ((1 - y_true) * y_pred).sum().to(torch.float32)
+    fn = (y_true * (1 - y_pred)).sum().to(torch.float32)
+
+    precision = tp / (tp + fp + epsilon)
+    recall = tp / (tp + fn + epsilon)
+
+    # F1 Score 계산
+    f1 = 2 * (precision * recall) / (precision + recall + epsilon)
+    return f1
+'''
+###
 
 def train(data_dir, model_dir, args):
     seed_everything(args.seed)
@@ -167,6 +186,12 @@ def train(data_dir, model_dir, args):
         model.train()
         loss_value = 0
         matches = 0
+
+        ###
+        all_labels = []
+        all_preds = []
+        ###
+
         for idx, train_batch in enumerate(train_loader):
             inputs, labels = train_batch
             inputs = inputs.to(device)
@@ -201,6 +226,20 @@ def train(data_dir, model_dir, args):
                 loss_value = 0
                 matches = 0
 
+            ###
+            all_labels.append(labels)
+            all_preds.append(preds)
+            ###
+        ###
+        all_labels = torch.cat(all_labels)
+        all_preds = torch.cat(all_preds)
+        #f1_score = calculate_f1_score(all_labels, all_preds)
+        train_f1_micro = tmf.f1_score(all_preds, all_labels, "multiclass", num_classes=num_classes, average='micro')
+        train_f1_macro = tmf.f1_score(all_preds, all_labels, "multiclass", num_classes=num_classes, average='macro')
+        print(f"F1 Score on training set: micro {train_f1_micro} || macro {train_f1_macro}")
+        
+        ###
+
         scheduler.step()
 
         # val loop
@@ -210,6 +249,12 @@ def train(data_dir, model_dir, args):
             val_loss_items = []
             val_acc_items = []
             figure = None
+            
+            ###
+            all_labels = []
+            all_preds = []
+            ###
+            
             for val_batch in val_loader:
                 inputs, labels = val_batch
                 inputs = inputs.to(device)
@@ -217,6 +262,11 @@ def train(data_dir, model_dir, args):
 
                 outs = model(inputs)
                 preds = torch.argmax(outs, dim=-1)
+                
+                ###
+                all_labels.append(labels)
+                all_preds.append(preds)
+                ###
 
                 loss_item = criterion(outs, labels).item()
                 acc_item = (labels == preds).sum().item()
@@ -252,8 +302,24 @@ def train(data_dir, model_dir, args):
                 f"[Val] acc : {val_acc:4.2%}, loss: {val_loss:4.2} || "
                 f"best acc : {best_val_acc:4.2%}, best loss: {best_val_loss:4.2}"
             )
+
+            ###
+            all_labels = torch.cat(all_labels)
+            all_preds = torch.cat(all_preds)
+            #f1_score = calculate_f1_score(all_labels, all_preds)
+            val_f1_micro = tmf.f1_score(all_preds, all_labels, "multiclass", num_classes=num_classes, average='micro')
+            val_f1_macro = tmf.f1_score(all_preds, all_labels, "multiclass", num_classes=num_classes, average='macro')
+            print(f"F1 Score on validation set: {val_f1_micro} || macro {val_f1_macro}")
+            ###
+
             logger.add_scalar("Val/loss", val_loss, epoch)
             logger.add_scalar("Val/accuracy", val_acc, epoch)
+            
+            ###
+            logger.add_scalar("F1 Score micro", val_f1_micro, epoch)
+            logger.add_scalar("F1 Score macro", val_f1_macro, epoch)
+            ###
+
             logger.add_figure("results", figure, epoch)
             print()
 

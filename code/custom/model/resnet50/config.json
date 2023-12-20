@@ -1,6 +1,6 @@
 {
     "seed": 42,
-    "epochs": 300,
+    "epochs": 20,
     "dataset": "MaskBaseDataset",
     "augmentation": "BaseAugmentation",
     "resize": [
