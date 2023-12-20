@@ -340,7 +340,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--data_dir",
         type=str,
-        default=os.environ.get("SM_CHANNEL_TRAIN", "/opt/ml/input/data/train/images"),
+        default=os.environ.get("SM_CHANNEL_TRAIN", "C:/Users/82104/Desktop/boostcamp/boostcamp_level1_project/train/images"),
     )
     parser.add_argument(
         "--model_dir", type=str, default=os.environ.get("SM_MODEL_DIR", "./model")

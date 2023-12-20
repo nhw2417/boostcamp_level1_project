@@ -193,6 +193,13 @@ class MaskBaseDataset(Dataset):
         std=(0.237, 0.247, 0.246),
         val_ratio=0.2,
     ):
+        ###
+        self.image_paths = []
+        self.mask_labels = []
+        self.gender_labels = []
+        self.age_labels = []
+        ###
+
         self.data_dir = data_dir
         self.mean = mean
         self.std = std
@@ -205,11 +212,13 @@ class MaskBaseDataset(Dataset):
     def setup(self):
         """데이터 디렉토리로부터 이미지 경로와 라벨을 설정하는 메서드"""
         profiles = os.listdir(self.data_dir)
+
         for profile in profiles:
             if profile.startswith("."):  # "." 로 시작하는 파일은 무시합니다
                 continue
 
             img_folder = os.path.join(self.data_dir, profile)
+
             for file_name in os.listdir(img_folder):
                 _file_name, ext = os.path.splitext(file_name)
                 if (
@@ -255,7 +264,9 @@ class MaskBaseDataset(Dataset):
     def __getitem__(self, index):
         """인덱스에 해당하는 데이터를 가져오는 메서드"""
         assert self.transform is not None, ".set_tranform 메소드를 이용하여 transform 을 주입해주세요"
-
+        ###
+        assert 0 <= index <len(self.image_paths), f"Index {index} out of range, total images: {len(self.image_paths)}"
+        ###
         image = self.read_image(index)
         mask_label = self.get_mask_label(index)
         gender_label = self.get_gender_label(index)
