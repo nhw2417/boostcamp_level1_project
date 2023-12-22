@@ -12,6 +12,7 @@ class ResNet50(nn.Module):
         return self.resnet(x)
     
 <<<<<<< HEAD
+<<<<<<< HEAD
 class WideResNet101(nn.Module):
     def __init__(self, num_classes):
         super().__init__()
@@ -23,10 +24,13 @@ class WideResNet101(nn.Module):
 
 =======
 >>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
+=======
+>>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
 class ResNext101(nn.Module):
     def __init__(self, num_classes):
         super().__init__()
         self.resnext = models.resnext101_32x8d(pretrained=True)
+<<<<<<< HEAD
 <<<<<<< HEAD
         #self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
         
@@ -68,11 +72,16 @@ class EnsembleModel(nn.Module):
         return output
 
 =======
+=======
+>>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
         self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
     
     def forward(self, x):
         return self.resnext(x)
         
+<<<<<<< HEAD
+>>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
+=======
 >>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
 class BaseModel(nn.Module):
     """
