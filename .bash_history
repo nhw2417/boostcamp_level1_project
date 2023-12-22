@@ -194,3 +194,104 @@ python
 source /opt/conda/bin/activate myenv
 watch -l 1 nvidia-smi
 watch -n 1 nvidia-smi
+source /opt/conda/bin/activate myenv
+watch -n 1 nvidia-smi
+conda activate myenv
+cd code/custom/
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+python train.py --model ResNet50 --criterion focal --name resnet50_focal
+tensorboard --logdir model
+python train.py --model ResNet50 --criterion label_smoothing --name resnet50_labelsmoothing
+echo $SM_CHANNEL_EVAL
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+python inference.py --model Resnet50 --model_dir "model/resnet_f1" --output_dir "output/resnet_f1"
+python inference.py --model ResNet50 --model_dir "model/resnet_f1" --output_dir "output/resnet_f1"
+python inference.py --model ResNet50 --model_dir "model/resnet50_f1" --output_dir "output/resnet_f1"
+python inference.py --model ResNet50 --model_dir "model/resnet50_focal" --output_dir "output/resnet_focal"
+python inference.py --model ResNet50 --model_dir "model/resnet50_labelsmoothing" --output_dir "output/resnet50_labelsmoothing"
+py
+python train.py --model ResNet50 --name resnet50
+tensorboard --logdir
+tensorboard --logdir model
+pip install torchmetrics
+python train.py --model ResNet50 --name resnet50
+python train.py --model ResNet50 --name resnet50
+python train.py --model ResNet50 --name resnet50
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+tensorboard --logdir model
+python inference.py --model ResNet50 --model_dir model/resent50 --ourput_dir output/resnet50
+python inference.py --model ResNet50 --model_dir model/resent50 --output_dir output/resnet50
+python inference.py --model ResNet50 --model_dir model/resnet50 --output_dir output/resnet50
+tensorboard --logdir model
+python train.py --batch_size 512 --model ResNet50 --name batchsize_test
+python train.py --batch_size 1024 --model ResNet50 --name batchsize_test2
+python train.py --batch_size 32 --model ResNet50 --name batchsize_test3
+python train.py --model ResNet50 --name batchsize_test4
+tensorboard --logdir model
+tensorboard --logdir model
+python train.py --model ResNet50 --name batchsize_test5
+tensorboard --logdir model
+python inference.py --model ResNet50 --model_dir model/resnet50_batch32 --output_dir output/resnet50_batch32
+python train.py --model ResNet50 --criterion f1 --name resnet50_f1
+tensorboard --logdir model
+python train.py --model ResNet50 --criterion focal --name resnet50_focal
+tensorboard --logdir model
+python train.py --model ResNet50 --optimizer AdamW --name resnet50_admaw
+tensorboard --logdir model
+python
+python train.py --model WideResNet101 --optimizer AdamW --name wideresnet101_adamw
+python train.py --model WideResNet101 --optimizer AdamW --name wideresnet101_adamw
+python train.py --model WideResNet101 --optimizer AdamW --name wideresnet101_adamw
+python train.py --model WideResNet101 --optimizer AdamW --name wideresnet101_adamw
+tensorboard --logdir
+tensorboard --logdir model
+python train.py --model ResNext101 --optimizer AdamW --name resnext101_adamw
+tensorboard --logdir model
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw
+python
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw --resize [224, 224]
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw --resize 224, 225
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw --resize 224, 224
+python train.py --model VitB16 --optimizer AdamW --name vitb16_adamw --resize 224 224
+tensorboard --logdir model
+python train.py --model WideResNet101 --optimizer AdamW --name wideresnet101_adamw
+git add .
+git add .
+tensorboard --logdir model
+git pull
+git push
+python train.py --model ResNext101 --optimizer AdamW --criterion focal --name resnext101_adamw_focal
+tensorboard --logdir model
+python train.py --model ResNext101 --optimizer AdamW --criterion label_smoothing --name resnext101_adamw_labelsmoothing
+tensorboard --logdir mdoel
+tensorboard --logdir mdoel
+tensorboard --logdir model
+python train.py --model ResNext101 --optimizer AdamW --criterion f1 --name resnext101_adamw_f1
+python train.py --model ResNext101 --optimizer AdamW --name resnext101_adamw_extrafc
+tensorboard --logdir model
+git commit -am 'add model'
+git status
+git add .
+git add .
+git add .
+git status
+git commit -m 'add model'
+git push

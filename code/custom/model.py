@@ -11,6 +11,69 @@ class ResNet50(nn.Module):
     def forward(self, x):
         return self.resnet(x)
     
+<<<<<<< HEAD
+class WideResNet101(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.wide_resnet = models.wide_resnet101_2(pretrained=True)
+        self.wide_resnet.fc = nn.Linear(self.wide_resnet.fc.in_features, num_classes)
+    
+    def forward(self, x):
+        return self.wide_resnet(x)
+
+=======
+>>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
+class ResNext101(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.resnext = models.resnext101_32x8d(pretrained=True)
+<<<<<<< HEAD
+        #self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
+        
+        ###
+        fc_layers = [nn.Linear(self.resnext.fc.in_features, 512),
+                     nn.ReLU(),
+                     nn.Linear(512,256),
+                     nn.ReLU(),
+                     nn.Linear(256,128),
+                     nn.ReLU(),
+                     nn.Linear(128, num_classes)]
+        self.resnext.fc = nn.Sequential(*fc_layers)
+        ###
+
+    def forward(self, x):
+        return self.resnext(x)
+
+class VitB16(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.vit = models.vit_b_16(pretrained=True)
+        self.vit.heads.head = nn.Linear(self.vit.heads.head.in_features, num_classes)
+    
+    def forward(self, x):
+        return self.vit(x)
+
+class EnsembleModel(nn.Module):
+    def __init__(self, modelA, modelB, modelC):
+        super(EnsembleModel, self).__init__()
+        self.modelA = modelA
+        self.modelB = modelB
+        self.modelC = modelC
+
+    def forward(self, x):
+        outputA = self.modelA(x)
+        outputB = self.modelB(x)
+        outputC = self.modelC(x)
+        output = (outputA + outputB + outputC) / 3
+        return output
+
+=======
+        self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
+    
+    def forward(self, x):
+        return self.resnext(x)
+        
+>>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
 class BaseModel(nn.Module):
     """
     기본적인 컨볼루션 신경망 모델

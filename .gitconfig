@@ -3,3 +3,5 @@
 	name = Hyunwoo Nam
 [credential]
 	helper = store
+[http]
+	postBuffer = 157286400
