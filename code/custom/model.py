@@ -11,6 +11,15 @@ class ResNet50(nn.Module):
     def forward(self, x):
         return self.resnet(x)
     
+class ResNext101(nn.Module):
+    def __init__(self, num_classes):
+        super().__init__()
+        self.resnext = models.resnext101_32x8d(pretrained=True)
+        self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
+    
+    def forward(self, x):
+        return self.resnext(x)
+        
 class BaseModel(nn.Module):
     """
     기본적인 컨볼루션 신경망 모델
