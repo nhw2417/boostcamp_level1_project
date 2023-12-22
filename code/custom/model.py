@@ -11,27 +11,11 @@ class ResNet50(nn.Module):
     def forward(self, x):
         return self.resnet(x)
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-class WideResNet101(nn.Module):
-    def __init__(self, num_classes):
-        super().__init__()
-        self.wide_resnet = models.wide_resnet101_2(pretrained=True)
-        self.wide_resnet.fc = nn.Linear(self.wide_resnet.fc.in_features, num_classes)
-    
-    def forward(self, x):
-        return self.wide_resnet(x)
-
-=======
->>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
-=======
->>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
 class ResNext101(nn.Module):
     def __init__(self, num_classes):
         super().__init__()
         self.resnext = models.resnext101_32x8d(pretrained=True)
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         #self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
         
         ###
@@ -71,18 +55,11 @@ class EnsembleModel(nn.Module):
         output = (outputA + outputB + outputC) / 3
         return output
 
-=======
-=======
->>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
         self.resnext.fc = nn.Linear(self.resnext.fc.in_features, num_classes)
     
     def forward(self, x):
         return self.resnext(x)
         
-<<<<<<< HEAD
->>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
-=======
->>>>>>> d889151fbdaafceb90582d7181531a015d4306d0
 class BaseModel(nn.Module):
     """
     기본적인 컨볼루션 신경망 모델
