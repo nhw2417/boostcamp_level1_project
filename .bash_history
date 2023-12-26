@@ -295,3 +295,43 @@ git add .
 git status
 git commit -m 'add model'
 git push
+source /opt/conda/bin/activate myenv
+git push
+git config --global http.postBuffer 157286400
+git rev-list --objects --all |   git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' |   sed -n 's/^blob //p' |   sort --numeric-sort --key=2 |   cut -c 1-12,41- |   $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+git pull
+git status
+git commit git add .
+git add model.py
+git add code/custom/model.py
+git push
+git rev-list --objects --all |   git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' |   sed -n 's/^blob //p' |   sort --numeric-sort --key=2 |   cut -c 1-12,41- |   $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest
+git log
+git status
+git reset --mixed HEAD~6
+git commit -m 'add model'
+git pull
+git status
+git pull
+git push
+git pull
+git push
+cd code/custom 
+python inference.py --model ResNet50 --model_dir model/resnet50_adamw --output_dir output/resnet50_adamw
+python inference.py --model ResNet50 --model_dir model/resnet50_f1 --output_dir output/resnet50_f1
+python inference.py --model ResNet50 --model_dir model/resnet50_focal --output_dir output/resnet50_focal
+python inference.py --model ResNet50 --model_dir model/resnet50_mixedprecision --output_dir output/resnet50_mixedprecision
+python inference.py --model ResNext --model_dir model/resnext101_adamw --output_dir output/resnext101_adamw
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw --output_dir output/resnext101_adamw
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw_extrafc --output_dir output/resnext101_adamw_extrafc
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw_f1 --output_dir output/resnext101_adamw_f1
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw_focal --output_dir output/resnext101_adamw_focal
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw_labelsmoothing --output_dir output/resnext101_adamw_labelsmoothing
+python inference.py --model VitB16 --model_dir model/vitb16_adamw --output_dir output/vitb16_adamw
+python inference.py --model VitB16 --model_dir model/vitb16_adamw --output_dir output/vitb16_adamw --resize 255 255
+python inference.py --model VitB16 --model_dir model/vitb16_adamw --output_dir output/vitb16_adamw --resize 224 224
+python inference.py --model WideResNet101 --model_dir model/wideresnet101_adamw --output_dir output/wideresnet101_adamw
+python inference.py --model WideResNet101 --model_dir model/wideresnet101_adamw --output_dir output/wideresnet101_adamw
+python inference.py --model WideResNet101 --model_dir model/wideresnet101_adamw --output_dir output/wideresnet101_adamw
+python inference.py --model ResNext101 --model_dir model/resnext101_adamw_f1 --output_dir output/resnext101_adamw_f1
+tensorboard --logdir model
