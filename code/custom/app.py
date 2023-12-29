@@ -10,7 +10,7 @@ num_classes = 18
 model = ResNet50(num_classes)
 
 # Load weights from the specified path
-weights_path = "C:/Users/82104/Desktop/boostcamp/boostcamp_level1_project/code/custom/model/resnet50/best.pth"
+weights_path = "code\custom\model\resnet50\best.pth"
 model.load_state_dict(torch.load(weights_path))
 
 model.eval()  # Set the model to evaluation mode
